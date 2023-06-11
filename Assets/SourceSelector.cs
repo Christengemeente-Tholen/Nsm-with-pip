@@ -6,19 +6,28 @@ using Klak.Ndi;
 
 namespace Nsm {
 
-public sealed class SourceSelector : MonoBehaviour
-{
-    [SerializeField] Dropdown _dropdown = null;
+    public sealed class SourceSelector : MonoBehaviour
+    {
+        [SerializeField] Dropdown _dropdown = null;
 
-    NdiReceiver _receiver;
-    List<string> _sourceNames;
-    bool _disableCallback;
+        NdiReceiver _receiver;
+        List<string> _sourceNames;
+        bool _disableCallback;
 
-    // HACK: Assuming that the dropdown has more than
-    // three child objects only while it's opened.
-    bool IsOpened => _dropdown.transform.childCount > 3;
+        // HACK: Assuming that the dropdown has more than
+        // three child objects only while it's opened.
+        bool IsOpened => _dropdown.transform.childCount > 3;
 
-    void Start() => _receiver = GetComponent<NdiReceiver>();
+    void Start() {
+        _receiver = GetComponent<NdiReceiver>();
+
+        // Use items from last startup
+        string configItem = PlayerPrefs.GetString(_receiver.name);
+        _sourceNames = NdiFinder.sourceNames.ToList();
+        int configItemIndex = _sourceNames.IndexOf(configItem);
+        if (configItemIndex > 0)
+            _receiver.ndiName = _sourceNames[configItemIndex];
+    }
 
     void Update()
     {
@@ -55,13 +64,16 @@ public sealed class SourceSelector : MonoBehaviour
     {
         if (_disableCallback) return;
         _receiver.ndiName = _sourceNames[value];
+
+        // save selection in config
+        PlayerPrefs.SetString(_receiver.name, _receiver.ndiName);
     }
 
     public void OnClickEmptyArea()
     {
         var go = _dropdown.gameObject;
         go.SetActive(!go.activeSelf);
-        Cursor.visible = go.activeSelf;
+        //Cursor.visible = go.activeSelf;
     }
 }
 
