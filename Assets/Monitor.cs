@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Klak.Ndi;
+using System.Collections;
 
 namespace Nsm {
 
@@ -14,6 +15,7 @@ public sealed class Monitor : MonoBehaviour
 
     void Start()
     {
+        Application.runInBackground = true;
         _target = GetComponent<RawImage>();
         _fitter = GetComponent<AspectRatioFitter>();
 
