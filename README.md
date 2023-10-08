@@ -1,5 +1,6 @@
-Nsm - NDI Simple Monitor
+Nsm with pip - NDI Simple Monitor 
 ========================
+Small fork so multiple ndi sources are shown instead of just one, i made it like this because the standard NDI studio monitor for mac doesn't have PIP.
 
 ![screenshot](https://i.imgur.com/k1aF4J0l.jpg)
 
