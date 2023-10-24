@@ -3,43 +3,44 @@ using UnityEngine.UI;
 using Klak.Ndi;
 using System.Collections;
 
-namespace Nsm {
-
-public sealed class Monitor : MonoBehaviour
+namespace Nsm
 {
-    [SerializeField] NdiReceiver _receiver = null;
 
-    RawImage _target;
-    AspectRatioFitter _fitter;
-    Texture2D _empty;
-
-    void Start()
+    public sealed class Monitor : MonoBehaviour
     {
-        Application.runInBackground = true;
-        _target = GetComponent<RawImage>();
-        _fitter = GetComponent<AspectRatioFitter>();
+        [SerializeField] NdiReceiver _receiver = null;
 
-        _empty = new Texture2D(1, 1);
-        _empty.SetPixel(0, 0, Color.clear);
-        _empty.Apply();
-    }
+        RawImage _target;
+        AspectRatioFitter _fitter;
+        Texture2D _empty;
 
-    void OnDestroy()
-      => Destroy(_empty);
-
-    void Update()
-    {
-        var tex = _receiver.texture;
-        if (tex != null)
+        void Start()
         {
-            _target.texture = tex;
-            _fitter.aspectRatio = (float)tex.width / tex.height;
+            Application.runInBackground = true;
+            _target = GetComponent<RawImage>();
+            _fitter = GetComponent<AspectRatioFitter>();
+
+            _empty = new Texture2D(1, 1);
+            _empty.SetPixel(0, 0, Color.clear);
+            _empty.Apply();
         }
-        else
+
+        void OnDestroy()
+          => Destroy(_empty);
+
+        void Update()
         {
-            _target.texture = _empty;
+            var tex = _receiver.texture;
+            if (tex != null)
+            {
+                _target.texture = tex;
+                _fitter.aspectRatio = (float)tex.width / tex.height;
+            }
+            else
+            {
+                _target.texture = _empty;
+            }
         }
     }
-}
 
 } // namespace Nsm
