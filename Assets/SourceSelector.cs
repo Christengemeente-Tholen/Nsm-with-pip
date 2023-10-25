@@ -14,6 +14,7 @@ namespace Nsm
         NdiReceiver _receiver;
         List<string> _sourceNames;
         bool _disableCallback;
+        bool hasDragged;
 
         // HACK: Assuming that the dropdown has more than
         // three child objects only while it's opened.
@@ -68,13 +69,28 @@ namespace Nsm
             _receiver.ndiName = _sourceNames[value];
 
             // save selection in config
+            Debug.Log(_receiver.name);
             PlayerPrefs.SetString(_receiver.name, _receiver.ndiName);
+        }
+
+        public void OnDrag()
+        {
+            hasDragged = true;
+        }
+
+        public void StopDrag()
+        {
+            hasDragged = false;
         }
 
         public void OnClickEmptyArea()
         {
-            var go = _dropdown.gameObject;
-            go.SetActive(!go.activeSelf);
+            // startingPos = transform.position;
+            if (!hasDragged)
+            {
+                var go = _dropdown.gameObject;
+                go.SetActive(!go.activeSelf);
+            }
             //Cursor.visible = go.activeSelf;
         }
     }
