@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Klak.Ndi;
-using System.Collections;
 
 namespace Nsm
 {
