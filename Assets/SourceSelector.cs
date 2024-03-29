@@ -69,8 +69,8 @@ namespace Nsm
             _receiver.ndiName = _sourceNames[value];
 
             // save selection in config
-            Debug.Log(_receiver.name);
             PlayerPrefs.SetString(_receiver.name, _receiver.ndiName);
+            PlayerPrefs.Save();
         }
 
         public void OnDrag()
