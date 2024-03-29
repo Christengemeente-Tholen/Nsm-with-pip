@@ -6,11 +6,28 @@
       "scopes": [
         "jp.keijiro"
       ]
+    },
+    {
+      "name": "Voltstro UPM",
+      "url": "https://upm-pkgs.voltstro.dev",
+      "scopes": [
+        "dev.voltstro",
+        "org.nuget",
+        "com.cysharp.unitask"
+      ]
     }
   ],
   "dependencies": {
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.ugui": "1.0.0",
+<<<<<<< Updated upstream
     "jp.keijiro.klak.ndi": "2.0.0"
+=======
+    "dev.voltstro.unitywebbrowser": "2.1.1",
+    "dev.voltstro.unitywebbrowser.engine.cef.linux.x64": "2.1.1-122.1.13",
+    "dev.voltstro.unitywebbrowser.engine.cef.win.x64": "2.1.1-122.1.13",
+    "jp.keijiro.klak.ndi": "2.0.0",
+    "com.unity.modules.androidjni": "1.0.0"
+>>>>>>> Stashed changes
   }
 }
